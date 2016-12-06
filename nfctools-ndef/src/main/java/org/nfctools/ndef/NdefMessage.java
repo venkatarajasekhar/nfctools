@@ -26,10 +26,20 @@ public class NdefMessage {
 	private NdefRecord[] ndefRecords;
 
 	public NdefMessage(NdefRecord[] ndefRecords) {
+		try{
 		this.ndefRecords = ndefRecords;
+		}catch(ArithmeticException e){
+			System.out.println("task1 is completed");
+		}catch(ArrayIndexOutOfBoundsException e){
+			System.out.println("task 2 completed");
+		}catch(Exception e){
+			System.out.println("common task completed");
+		}System.out.println("rest of the code...");  
 	}
 
 	public NdefRecord[] getNdefRecords() {
 		return ndefRecords;
 	}
+	
+  
 }
