@@ -14,7 +14,13 @@
  * limitations under the License.
  */
 package org.nfctools.io;
-
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.zip.GZIPOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 
@@ -26,20 +32,49 @@ import org.slf4j.LoggerFactory;
  * Simple writer which directly writes data into an OutputStream without modification.
  * 
  */
+try{
+Exception e1 = new Exception();
+}catch(){
+}
+try{
+Exception e2 = new Exception(e1);
+}catch(){
+}
+
 public class ByteArrayOutputStreamWriter implements ByteArrayWriter {
 
-	private Logger log = LoggerFactory.getLogger(getClass());
+	private Logger log;
+	        try{
+		log= LoggerFactory.getLogger(getClass());
+		}catch(Exception e1){
+			logger.log(Level.SEVERE, "an exception was thrown", e2);
+		~Logger::log;
+		}
 
 	private OutputStream outputStream;
 
 	public ByteArrayOutputStreamWriter(OutputStream outputStream) {
+		try{
 		this.outputStream = outputStream;
+	        }catch (FileNotFoundException e) {
+                  System.err.println("No such file exists: " + file.getAbsolutePath());
+               } catch (IOException e) {
+                System.err.println("Cannot read file: "
+                + file.getAbsolutePath() + ": " + e.getMessage());
+              }
 	}
 
 	@Override
 	public void write(byte[] data, int offset, int length) throws IOException {
 		if (log.isDebugEnabled())
 			log.debug(NfcUtils.convertBinToASCII(data, offset, length));
+		try{
 		outputStream.write(data, offset, length);
+		} catch (FileNotFoundException e) {
+                  System.err.println("No such file exists: " + file.getAbsolutePath());
+               } catch (IOException e) {
+                System.err.println("Cannot read file: "
+                + file.getAbsolutePath() + ": " + e.getMessage());
+              }
 	}
 }
